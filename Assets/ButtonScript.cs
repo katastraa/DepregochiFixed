@@ -7,12 +7,6 @@ public class ButtonScript : MonoBehaviour
 {
     public TimerScript timerScript;
    
-
-    private void Awake()
-    {
-
-    }
-
     // Update is called once per frame
     void Update() //pa que funcione con el teclao
     {
@@ -22,11 +16,6 @@ public class ButtonScript : MonoBehaviour
             timerScript.Videogames();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            timerScript.OverThinkingMechanic();
-            timerScript.Music();
-        }
     }
 
     

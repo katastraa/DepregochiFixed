@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TalkScript : MonoBehaviour
 {
-    int i;
+    public TimerScript timerscript;
+    public int i;
     public TMPro.TextMeshProUGUI displayText;
     public GameObject ImageText;
     public float velocidadLetras;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         i = 0;
         velocidadLetras = 0.1f;
@@ -20,8 +22,14 @@ public class TalkScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Detect if the Alpha 3 key is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // Call the method that is linked to the button press
+            ActiveImageText();
+        }
     }
+
     public void ChangeText(string newText)
     {
         StopAllCoroutines();
@@ -32,15 +40,15 @@ public class TalkScript : MonoBehaviour
     public void AttackText()
     {
         if (i == 0)
-            ChangeText("'Al siguiente truco lo llamaré Megapedo");
+            ChangeText("No me apetece hablar");
         if (i == 1)
-            ChangeText("Party, he gomitao");
+            ChangeText("No creo que tengamos nada de lo que hablar");
         if (i == 2)
-            ChangeText("Es como si no llevara nada");
+            ChangeText("Te estoy diciendo que no necesito nada");
         if (i == 3)
-            ChangeText(":)");
+            ChangeText("No necesito ayuda");
         if (i == 4)
-            ChangeText("lolo");
+            ChangeText("Déjame");
         i++;
         if (i == 5)
             i = 0;
@@ -60,6 +68,7 @@ public class TalkScript : MonoBehaviour
     {
         ImageText.SetActive(true);
         AttackText();
+        
     }
 
     public void DesactiveImageText()

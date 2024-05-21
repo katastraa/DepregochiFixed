@@ -29,6 +29,11 @@ public class TimerScript : MonoBehaviour {
 
     public TalkScript talkScript;
 
+    public GameObject MusicButton;
+    public GameObject TalkButton;
+    public GameObject LeaveButton;
+    public GameObject VideogameButton;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -50,8 +55,11 @@ public class TimerScript : MonoBehaviour {
             GameOverText.SetActive (true);
             Time.timeScale = 0;
             tamaIsAlive = false;
-            GetComponent<Button>().interactable = false;
-
+            VideogameButton.SetActive (false);
+            MusicButton.SetActive (false);
+            TalkButton.SetActive (false);
+            LeaveButton.SetActive (false);
+            
         }
             
         if (timeLeft > maxTime) //variable capada para que no tengas tiempo infinito
@@ -72,6 +80,11 @@ public class TimerScript : MonoBehaviour {
     public void Videogames()
     {
        timeLeft += BonusTime;
+        if (Overthink==true)
+        {
+            Overthink=false;
+            OverthinkTimer = 0;
+        }
         talkScript.DesactiveImageText();
     }
     public void OverstimulationMechanic ()
@@ -80,13 +93,19 @@ public class TimerScript : MonoBehaviour {
         if (OverstimulationTimer >= OverSPMax)
         {
             Overstimulation = true;
+            OverstimulationTimer = OverSPMax;
         }
     }
 
     public void Music ()
     {
         timeLeft += BonusTime / 2;
-        Overstimulation = false;
+        if (Overstimulation == true)
+        {
+            Overstimulation = false;
+            OverstimulationTimer = 0;
+        }
+
         talkScript.DesactiveImageText();
        
     }
@@ -97,7 +116,9 @@ public class TimerScript : MonoBehaviour {
         if (OverthinkTimer >= OverTPMax)
         {
             Overthink = true;
+            OverthinkTimer = OverTPMax;
         }
     }
+   
 }
 
