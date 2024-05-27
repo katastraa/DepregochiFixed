@@ -11,22 +11,28 @@ public class TalkScript : MonoBehaviour
     public TMPro.TextMeshProUGUI displayText;
     public GameObject ImageText;
     public float velocidadLetras;
+    public Button Talkbutton;
+   
 
     // Start is called before the first frame update
     public void Start()
     {
         i = 0;
         velocidadLetras = 0.1f;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         // Detect if the Alpha 3 key is pressed
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             // Call the method that is linked to the button press
             ActiveImageText();
+            timerscript.AngerMechanic();
+            Talkbutton.onClick.AddListener(() => StartCoroutine(timerscript.PauseTimer()));
         }
     }
 

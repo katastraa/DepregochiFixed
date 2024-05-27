@@ -10,6 +10,8 @@ public class TimerScript : MonoBehaviour {
     static public float timeLeft;
     public GameObject GameOverText;
     public bool tamaIsAlive = true;
+    public bool isGameOver = false;
+
 
     public float BonusTime = 10;
 
@@ -29,6 +31,14 @@ public class TimerScript : MonoBehaviour {
 
     public TalkScript talkScript;
 
+    public bool Anger = false;
+    public float AngerTimer = 0;
+    public float AngerPoints = 5;
+    public float AngerSPMax = 15;
+
+    public bool isTimerPaused = false;
+    public float pauseDuration = 2.0f;
+
     public GameObject MusicButton;
     public GameObject TalkButton;
     public GameObject LeaveButton;
@@ -45,13 +55,19 @@ public class TimerScript : MonoBehaviour {
     // Update is called once per frame
     public void Update()
     {
-        if (timeLeft > 0)
+        if (timeLeft <=0)
+        {
+            isGameOver = true;
+        }
+
+        if (timeLeft > 0 && !isTimerPaused)
         {
             timeLeft = timeLeft - Time.deltaTime;
             LinearTimer.fillAmount = timeLeft / maxTime;
         }
-        else
+        else if (timeLeft <= 0 && !isGameOver)
         {
+            
             GameOverText.SetActive (true);
             Time.timeScale = 0;
             tamaIsAlive = false;
@@ -59,8 +75,10 @@ public class TimerScript : MonoBehaviour {
             MusicButton.SetActive (false);
             TalkButton.SetActive (false);
             LeaveButton.SetActive (false);
-            
         }
+
+
+        
             
         if (timeLeft > maxTime) //variable capada para que no tengas tiempo infinito
 
@@ -120,5 +138,28 @@ public class TimerScript : MonoBehaviour {
         }
     }
    
+    public void AngerMechanic ()
+    {
+        timeLeft = 0;
+        AngerTimer += AngerPoints;
+
+        if (AngerTimer >= AngerSPMax)
+        {
+            Anger = true;
+            AngerTimer = AngerSPMax;
+        }
+
+
+    }
+    public IEnumerator PauseTimer()
+    {
+
+        isTimerPaused = true;
+        
+        yield return new WaitForSecondsRealtime(pauseDuration);
+        
+        isTimerPaused = false;
+        
+    }
 }
 

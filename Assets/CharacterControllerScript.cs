@@ -32,5 +32,14 @@ public class CharacterControllerScript : MonoBehaviour
         {
             animator.SetBool("isOverthinking", false);
         }
+
+        if (timerScript.Anger == true)
+        {
+            animator.SetBool("isAngry", true);
+        }
+        else
+        {
+            animator.SetBool("isAngry", false);
+        }
     }
 }
