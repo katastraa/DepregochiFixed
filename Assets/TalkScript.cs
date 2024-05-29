@@ -32,7 +32,7 @@ public class TalkScript : MonoBehaviour
             // Call the method that is linked to the button press
             ActiveImageText();
             timerscript.AngerMechanic();
-            Talkbutton.onClick.AddListener(() => StartCoroutine(timerscript.PauseTimer()));
+            
         }
     }
 

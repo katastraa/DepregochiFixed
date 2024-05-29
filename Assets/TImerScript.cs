@@ -10,7 +10,7 @@ public class TimerScript : MonoBehaviour {
     static public float timeLeft;
     public GameObject GameOverText;
     public bool tamaIsAlive = true;
-    public bool isGameOver = false;
+    
 
 
     public float BonusTime = 10;
@@ -37,7 +37,9 @@ public class TimerScript : MonoBehaviour {
     public float AngerSPMax = 15;
 
     public bool isTimerPaused = false;
-    public float pauseDuration = 2.0f;
+    public float pauseDuration = 2;
+    public bool isGameOver = false;
+    private float pauseEndTime;
 
     public GameObject MusicButton;
     public GameObject TalkButton;
@@ -55,13 +57,19 @@ public class TimerScript : MonoBehaviour {
     // Update is called once per frame
     public void Update()
     {
-        if (timeLeft <=0)
+        if (timeLeft <= 0)
         {
             isGameOver = true;
         }
 
-        if (timeLeft > 0 && !isTimerPaused)
+        if (isTimerPaused && !isGameOver && Time.time >= pauseEndTime)
         {
+            isTimerPaused = false;
+
+        }
+        else if (timeLeft > 0 )
+        {
+
             timeLeft = timeLeft - Time.deltaTime;
             LinearTimer.fillAmount = timeLeft / maxTime;
         }
@@ -151,15 +159,10 @@ public class TimerScript : MonoBehaviour {
 
 
     }
-    public IEnumerator PauseTimer()
+    public void PauseTimer()
     {
-
         isTimerPaused = true;
-        
-        yield return new WaitForSecondsRealtime(pauseDuration);
-        
-        isTimerPaused = false;
-        
+        pauseEndTime = Time.time + pauseDuration;
     }
 }
 
