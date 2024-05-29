@@ -40,6 +40,7 @@ public class TimerScript : MonoBehaviour {
     public float pauseDuration = 2;
     public bool isGameOver = false;
     private float pauseEndTime;
+    private float timerspeed = 1;
 
     public GameObject MusicButton;
     public GameObject TalkButton;
@@ -57,18 +58,13 @@ public class TimerScript : MonoBehaviour {
     // Update is called once per frame
     public void Update()
     {
-        if (timeLeft <= 0)
+       
+        if (timeLeft > 0)
         {
-            isGameOver = true;
-        }
-
-
-        if (timeLeft > 0 )
-        {
-            timeLeft = timeLeft - Time.deltaTime;
+            timeLeft = timeLeft - timerspeed * Time.deltaTime;
             LinearTimer.fillAmount = timeLeft / maxTime;
         }
-        else if (timeLeft<=0 && !isGameOver)
+        else if (timeLeft <= 0 && isTimerPaused == false)
         {
             GameOverText.SetActive (true);
             Time.timeScale = 0;
@@ -77,11 +73,12 @@ public class TimerScript : MonoBehaviour {
             MusicButton.SetActive (false);
             TalkButton.SetActive (false);
             LeaveButton.SetActive (false);
+        }else if (isTimerPaused == true) 
+        {
+            timeLeft = timeLeft - timerspeed * Time.deltaTime;
+            LinearTimer.fillAmount = timeLeft / maxTime;
         }
 
-
-        
-            
         if (timeLeft > maxTime) //variable capada para que no tengas tiempo infinito
 
         {timeLeft = maxTime;}
@@ -153,7 +150,9 @@ public class TimerScript : MonoBehaviour {
     }
     public void PauseTimer()
     {
+        timerspeed=0;
         isTimerPaused = true;
+        
     }
 
     public void Leave()
