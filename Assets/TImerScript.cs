@@ -62,20 +62,14 @@ public class TimerScript : MonoBehaviour {
             isGameOver = true;
         }
 
-        if (isTimerPaused && !isGameOver && Time.time >= pauseEndTime)
-        {
-            isTimerPaused = false;
 
-        }
-        else if (timeLeft > 0 )
+        if (timeLeft > 0 )
         {
-
             timeLeft = timeLeft - Time.deltaTime;
             LinearTimer.fillAmount = timeLeft / maxTime;
         }
-        else if (timeLeft <= 0 && !isGameOver)
+        else if (timeLeft<=0 && !isGameOver)
         {
-            
             GameOverText.SetActive (true);
             Time.timeScale = 0;
             tamaIsAlive = false;
@@ -156,13 +150,19 @@ public class TimerScript : MonoBehaviour {
             Anger = true;
             AngerTimer = AngerSPMax;
         }
-
-
     }
     public void PauseTimer()
     {
         isTimerPaused = true;
-        pauseEndTime = Time.time + pauseDuration;
+    }
+
+    public void Leave()
+    {
+        MusicButton.GetComponent<Button>().interactable = false;
+        TalkButton.GetComponent<Button>().interactable = false;
+        LeaveButton.GetComponent<Button>().interactable = false;
+        VideogameButton.GetComponent<Button>().interactable = false;
+
     }
 }
 

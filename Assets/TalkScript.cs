@@ -74,7 +74,6 @@ public class TalkScript : MonoBehaviour
     {
         ImageText.SetActive(true);
         AttackText();
-        
     }
 
     public void DesactiveImageText()
