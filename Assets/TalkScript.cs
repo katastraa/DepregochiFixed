@@ -10,7 +10,7 @@ public class TalkScript : MonoBehaviour
     public int i;
     public TMPro.TextMeshProUGUI displayText;
     public GameObject ImageText;
-    public float velocidadLetras, velocidadExtra, auxTimeLeft;
+    public float velocidadLetras, velocidadExtra, auxTimeLeft, clickCount;
     public Button Talkbutton;
    
 
@@ -21,6 +21,7 @@ public class TalkScript : MonoBehaviour
         velocidadLetras = 0.1f;
         velocidadExtra = 2.0f;
         auxTimeLeft = 0;
+        clickCount = 1;
     }
 
     // Update is called once per frame
@@ -90,15 +91,27 @@ public class TalkScript : MonoBehaviour
 
     public void PauseTimer()
     {
-        auxTimeLeft = TimerScript.timeLeft;
-        Debug.Log("<color=orange>PauseTimer: auxTimeLeft: " + auxTimeLeft + "</color>"); //esto es para debbugear, se puede quitar
-        timerScript.timerspeed=0;
-        timerScript.isTimerPaused = true;
+        if (timerScript.isTimerPaused == false)
+        {
+            auxTimeLeft = TimerScript.timeLeft;
+            timerScript.auxImage.fillAmount = auxTimeLeft / timerScript.maxTime;
+            Debug.Log("<color=orange>PauseTimer: auxTimeLeft: " + auxTimeLeft + "</color>"); //esto es para debbugear, se puede quitar
+            timerScript.timerspeed=0;
+            timerScript.isTimerPaused = true;
+        }
+        clickCount += 0.5f; //cuanto mas valor le des a esto mas rapido ira el timerLeft cuando se reanude en ResumeTimer
     }
     public void ResumeTimer()
     {
-        TimerScript.timeLeft = auxTimeLeft;
-        timerScript.timerspeed = 1;
-        timerScript.isTimerPaused = false;
+        if (timerScript.isTimerPaused == true)
+        {
+            timerScript.auxImage.fillAmount = 0;
+            TimerScript.timeLeft = auxTimeLeft;
+            timerScript.timerspeed = 1 * clickCount;
+            //Debug.Log("<color=blue>ResumeTimer: clicksCount: " + timerScript.timerspeed + "</color>");
+            timerScript.isTimerPaused = false;
+            auxTimeLeft = 0;
+        }
+        clickCount = 1;
     }
 }

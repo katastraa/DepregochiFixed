@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour {
 
-    public Image LinearTimer;
+    public Image LinearTimer, auxImage;
     public float maxTime = 2;
     static public float timeLeft;
     public GameObject GameOverText;
@@ -53,6 +53,7 @@ public class TimerScript : MonoBehaviour {
         GameOverText.SetActive(false);
        
         timeLeft = maxTime;
+        auxImage.fillAmount = 0;
     }
 
     float previousTimeLeft = -1; //esto es para debbugear, se puede quitar
@@ -99,6 +100,7 @@ public class TimerScript : MonoBehaviour {
         {
             timeLeft -= Time.deltaTime * TimerReduction/2;
         }
+
     }
 
     public void Videogames()
