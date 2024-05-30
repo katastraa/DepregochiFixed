@@ -40,7 +40,7 @@ public class TimerScript : MonoBehaviour {
     public float pauseDuration = 2;
     public bool isGameOver = false;
     private float pauseEndTime;
-    private float timerspeed = 1;
+    public float timerspeed = 1;
 
     public GameObject MusicButton;
     public GameObject TalkButton;
@@ -55,10 +55,17 @@ public class TimerScript : MonoBehaviour {
         timeLeft = maxTime;
     }
 
+    float previousTimeLeft = -1; //esto es para debbugear, se puede quitar
     // Update is called once per frame
     public void Update()
     {
-       
+        if (timeLeft != previousTimeLeft) //esto es para debbugear, se puede quitar
+        {
+            Debug.Log("<color=green>timeLeft = " + timeLeft + "</color>");
+            previousTimeLeft = timeLeft;
+        }
+        //---------
+        
         if (timeLeft > 0)
         {
             timeLeft = timeLeft - timerspeed * Time.deltaTime;
@@ -103,6 +110,7 @@ public class TimerScript : MonoBehaviour {
             OverthinkTimer = 0;
         }
         talkScript.DesactiveImageText();
+        Debug.Log("Videogames: timeLeft = " + timeLeft);
     }
     public void OverstimulationMechanic ()
     {
@@ -124,6 +132,7 @@ public class TimerScript : MonoBehaviour {
         }
 
         talkScript.DesactiveImageText();
+        Debug.Log("<color=red>Music: timeLeft = " + timeLeft + "</color>");
        
     }
     public void OverThinkingMechanic ()
@@ -148,20 +157,40 @@ public class TimerScript : MonoBehaviour {
             AngerTimer = AngerSPMax;
         }
     }
-    public void PauseTimer()
+
+/*     public void PauseTimer() //lo he puesto en TalkScript
     {
+        auxTimeLeft = timeLeft;
         timerspeed=0;
         isTimerPaused = true;
-        
-    }
+    } */
 
     public void Leave()
     {
+        //estas dos lineas son para que el contador de tiempo se pare cuando se desactivan los botones, si no lo quieres asi puedes quitarlas
+        //TalkScript talkScript = TalkButton.GetComponent<TalkScript>();
+        //talkScript.PauseTimer();
+        //----------------
+
         MusicButton.GetComponent<Button>().interactable = false;
         TalkButton.GetComponent<Button>().interactable = false;
         LeaveButton.GetComponent<Button>().interactable = false;
         VideogameButton.GetComponent<Button>().interactable = false;
+        StartCoroutine(ResumeButtons());
+    }
 
+    IEnumerator ResumeButtons()
+    {
+        yield return new WaitForSeconds(pauseDuration); //pauseDuration es el tiempo que quieres que los botones esten desactivados
+        MusicButton.GetComponent<Button>().interactable = true;
+        TalkButton.GetComponent<Button>().interactable = true;
+        LeaveButton.GetComponent<Button>().interactable = true;
+        VideogameButton.GetComponent<Button>().interactable = true;
+
+        //estas dos lineas son para que el contador de tiempo se reanude cuando se activan los botones, si no lo quieres asi puedes quitarlas
+        //TalkScript talkScript = TalkButton.GetComponent<TalkScript>();
+        //talkScript.ResumeTimer();
+        //----------------
     }
 }
 

@@ -6,11 +6,11 @@ using TMPro;
 
 public class TalkScript : MonoBehaviour
 {
-    public TimerScript timerscript;
+    public TimerScript timerScript;
     public int i;
     public TMPro.TextMeshProUGUI displayText;
     public GameObject ImageText;
-    public float velocidadLetras;
+    public float velocidadLetras, velocidadExtra, auxTimeLeft;
     public Button Talkbutton;
    
 
@@ -19,7 +19,8 @@ public class TalkScript : MonoBehaviour
     {
         i = 0;
         velocidadLetras = 0.1f;
-        
+        velocidadExtra = 2.0f;
+        auxTimeLeft = 0;
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class TalkScript : MonoBehaviour
         {
             // Call the method that is linked to the button press
             ActiveImageText();
-            timerscript.AngerMechanic();
+            timerScript.AngerMechanic();
             
         }
     }
@@ -39,7 +40,6 @@ public class TalkScript : MonoBehaviour
     public void ChangeText(string newText)
     {
         StopAllCoroutines();
-        //displayText.text = newText;
         StartCoroutine(TypeText(newText));
     }
 
@@ -62,12 +62,18 @@ public class TalkScript : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
+        PauseTimer();
         displayText.text = ""; // Clear the text field
         foreach (char c in text)
         {
             displayText.text += c; // Add the next character
             yield return new WaitForSeconds(velocidadLetras); // Wait before adding the next character
         }
+        //--
+        yield return new WaitForSeconds(velocidadExtra); // Esto es para esperar un tiempo extra d lectura y luego se desactive el texto
+        DesactiveImageText(); //si quires que funcione como antes que habia que pulsar el boton para que se desactive el texto, quita esta linea
+        //--
+        ResumeTimer();
     }
 
     public void ActiveImageText()
@@ -79,5 +85,20 @@ public class TalkScript : MonoBehaviour
     public void DesactiveImageText()
     {
         ImageText.SetActive(false);
+    }
+
+
+    public void PauseTimer()
+    {
+        auxTimeLeft = TimerScript.timeLeft;
+        Debug.Log("<color=orange>PauseTimer: auxTimeLeft: " + auxTimeLeft + "</color>"); //esto es para debbugear, se puede quitar
+        timerScript.timerspeed=0;
+        timerScript.isTimerPaused = true;
+    }
+    public void ResumeTimer()
+    {
+        TimerScript.timeLeft = auxTimeLeft;
+        timerScript.timerspeed = 1;
+        timerScript.isTimerPaused = false;
     }
 }

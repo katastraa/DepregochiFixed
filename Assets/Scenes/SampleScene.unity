@@ -373,10 +373,12 @@ MonoBehaviour:
   isTimerPaused: 0
   pauseDuration: 2
   isGameOver: 0
+  timerspeed: 1
   MusicButton: {fileID: 877807951}
   TalkButton: {fileID: 502991363}
   LeaveButton: {fileID: 1158524650}
   VideogameButton: {fileID: 401043379}
+  talkScriptObject: {fileID: 502991363}
 --- !u!114 &401043382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,18 +726,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 401043381}
-        m_TargetAssemblyTypeName: TimerScript, Assembly-CSharp
-        m_MethodName: PauseTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &502991366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,11 +776,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1febe25c31229f41b72a31f13bc4cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerscript: {fileID: 401043381}
+  timerScript: {fileID: 401043381}
   i: 0
   displayText: {fileID: 669792443}
   ImageText: {fileID: 1502095443}
   velocidadLetras: 0
+  velocidadExtra: 0
+  auxTimeLeft: 0
   Talkbutton: {fileID: 502991365}
 --- !u!1 &519420028
 GameObject:
