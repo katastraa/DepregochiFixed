@@ -101,6 +101,11 @@ public class TimerScript : MonoBehaviour {
             timeLeft -= Time.deltaTime * TimerReduction/2;
         }
 
+        if (Anger == true)//reducci�n de contador x estados
+        {
+            timeLeft -= Time.deltaTime * TimerReduction;
+        }
+
     }
 
     public void Videogames()
@@ -157,6 +162,20 @@ public class TimerScript : MonoBehaviour {
         {
             Anger = true;
             AngerTimer = AngerSPMax;
+        }
+    }
+
+    public void LeavingMechanic ()
+    {
+        if (Anger == true)
+        {
+            Anger = false;
+            AngerTimer = 0;
+        }
+
+        if (Anger == false)
+        {
+            Overthink = true;
         }
     }
 

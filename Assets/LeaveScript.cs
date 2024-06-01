@@ -17,6 +17,7 @@ public class LeaveScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             timerScript.Leave();
+            timerScript.LeavingMechanic();
         }
     }
 }

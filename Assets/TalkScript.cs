@@ -99,7 +99,7 @@ public class TalkScript : MonoBehaviour
             timerScript.timerspeed=0;
             timerScript.isTimerPaused = true;
         }
-        clickCount += 0.5f; //cuanto mas valor le des a esto mas rapido ira el timerLeft cuando se reanude en ResumeTimer
+        clickCount += 0.0f; //cuanto mas valor le des a esto mas rapido ira el timerLeft cuando se reanude en ResumeTimer
     }
     public void ResumeTimer()
     {
