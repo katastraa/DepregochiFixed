@@ -9,7 +9,7 @@ public class TimerScript : MonoBehaviour {
     public Image LinearTimer, auxImage;
     public float maxTime = 2;
     static public float timeLeft;
-    public GameObject GameOverText;
+    
     public bool tamaIsAlive = true;
     
 
@@ -51,7 +51,7 @@ public class TimerScript : MonoBehaviour {
     // Start is called before the first frame update
     public void Start()
     {
-        GameOverText.SetActive(false);
+        
        
         timeLeft = maxTime;
         auxImage.fillAmount = 0;
@@ -75,8 +75,7 @@ public class TimerScript : MonoBehaviour {
         }
         else if (timeLeft <= 0 && isTimerPaused == false)
         {
-            SceneManager.LoadScene(sceneName: "End Scene");
-            GameOverText.SetActive (true);
+            SceneManager.LoadScene("End Scene");
             Time.timeScale = 0;
             tamaIsAlive = false;
             VideogameButton.SetActive (false);

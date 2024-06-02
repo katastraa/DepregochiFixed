@@ -41,5 +41,7 @@ public class CharacterControllerScript : MonoBehaviour
         {
             animator.SetBool("isAngry", false);
         }
+
+        
     }
 }
