@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimerScript : MonoBehaviour {
 
@@ -74,6 +75,7 @@ public class TimerScript : MonoBehaviour {
         }
         else if (timeLeft <= 0 && isTimerPaused == false)
         {
+            SceneManager.LoadScene(sceneName: "End Scene");
             GameOverText.SetActive (true);
             Time.timeScale = 0;
             tamaIsAlive = false;

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour
 {
     public TimerScript timerScript;
-   
+    public Animator animator;
+
     // Update is called once per frame
     void Update() //pa que funcione con el teclao
     {
@@ -14,6 +15,7 @@ public class ButtonScript : MonoBehaviour
         { 
             timerScript.OverstimulationMechanic();
             timerScript.Videogames();
+            animator.SetTrigger("PlayingVideogames");
         }
 
     }

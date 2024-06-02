@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Button2Script : MonoBehaviour
 {
+    public Animator animator;
     public TimerScript timerScript;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Button2Script : MonoBehaviour
         {
             timerScript.OverThinkingMechanic();
             timerScript.Music();
+            animator.SetTrigger("PlayingMusic");
         }
 
     }
