@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LinearTimer: {fileID: 2051252424}
   auxImage: {fileID: 1277349916}
-  maxTime: 30
+  maxTime: 120
   tamaIsAlive: 0
   BonusTime: 5
   ButtonScript: {fileID: 401043382}
@@ -378,7 +378,7 @@ MonoBehaviour:
   LeaveButton: {fileID: 1158524650}
   VideogameButton: {fileID: 401043379}
   audiomanager: {fileID: 1799521930}
-  clipMusica: {fileID: 8300000, guid: 396daf392f7e58e4da56f15e004c644f, type: 3}
+  clipMusica: {fileID: 8300000, guid: b25ee06f221ea094db32677b8897b7fd, type: 3}
 --- !u!114 &401043382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +394,8 @@ MonoBehaviour:
   timerScript: {fileID: 401043381}
   animator: {fileID: 488174085}
   length: 2
+  audiomanager: {fileID: 1799521930}
+  clipJuego: {fileID: 8300000, guid: c804ec831f6d20149ba7a18d8de14260, type: 3}
 --- !u!114 &401043383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,6 +801,8 @@ MonoBehaviour:
   auxTimeLeft: 0
   clickCount: 0
   Talkbutton: {fileID: 502991365}
+  audiomanager: {fileID: 1799521930}
+  Voz: {fileID: 8300000, guid: 647a539afd7d2c342b48cb25aa2c9aef, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,6 +1434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerScript: {fileID: 401043381}
+  audiomanager: {fileID: 1799521930}
+  puerta: {fileID: 8300000, guid: c736c911bca479f4980816b7046bc221, type: 3}
 --- !u!1 &1277349914
 GameObject:
   m_ObjectHideFlags: 0

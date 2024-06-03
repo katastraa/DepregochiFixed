@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class Audiomanager : MonoBehaviour
+public class AudioScript : MonoBehaviour
 {
     private AudioSource audioSource;
     // Start is called before the first frame update
@@ -12,14 +12,11 @@ public class Audiomanager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void ReproducirSonido (AudioClip audio)
+    public void ReproducirSonido(AudioClip audio)
     {
         audioSource.Stop();
         audioSource.PlayOneShot(audio);
-        
+
     }
-
-   
-
 
 }

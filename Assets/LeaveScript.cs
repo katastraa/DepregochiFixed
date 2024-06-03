@@ -7,7 +7,9 @@ using UnityEngine.UIElements;
 public class LeaveScript : MonoBehaviour
 {
     public TimerScript timerScript;
-   
+    public Audiomanager audiomanager;
+    public AudioClip puerta;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,8 @@ public class LeaveScript : MonoBehaviour
         {
             timerScript.Leave();
             timerScript.LeavingMechanic();
-           
+            audiomanager.ReproducirSonido(puerta);
+
         }
        
     }

@@ -9,6 +9,8 @@ public class ButtonScript : MonoBehaviour
     public Animator animator;
     public float length;
     private Button _button;
+    public Audiomanager audiomanager;
+    public AudioClip clipJuego;
 
     private void Awake()
     {
@@ -24,6 +26,7 @@ public class ButtonScript : MonoBehaviour
             animator.SetTrigger("PlayingVideogames");
             StartCoroutine(PauseVideogameAnimation());
             FadeToColor(_button.colors.pressedColor);
+            audiomanager.ReproducirSonido(clipJuego);
         }
         else if (Input.GetKeyUp(KeyCode.Z))
         {

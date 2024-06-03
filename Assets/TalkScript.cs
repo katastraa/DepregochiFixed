@@ -13,7 +13,10 @@ public class TalkScript : MonoBehaviour
     public float velocidadLetras, velocidadExtra, auxTimeLeft, clickCount;
     public Button Talkbutton;
     private Button _button3;
-   
+
+    public Audiomanager audiomanager;
+    public AudioClip Voz;
+
 
     // Start is called before the first frame update
     public void Start()
@@ -40,6 +43,7 @@ public class TalkScript : MonoBehaviour
             ActiveImageText();
             timerScript.AngerMechanic();
             FadeToColor3(Talkbutton.colors.pressedColor);
+            audiomanager.ReproducirSonido(Voz);
 
         }else if (Input.GetKeyUp(KeyCode.B))
         {
