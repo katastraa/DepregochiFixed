@@ -48,6 +48,9 @@ public class TimerScript : MonoBehaviour {
     public GameObject LeaveButton;
     public GameObject VideogameButton;
 
+    public Audiomanager audiomanager;
+    public AudioClip clipMusica;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -76,7 +79,7 @@ public class TimerScript : MonoBehaviour {
         else if (timeLeft <= 0 && isTimerPaused == false)
         {
             SceneManager.LoadScene("End Scene");
-            Time.timeScale = 0;
+           // Time.timeScale = 0;
             tamaIsAlive = false;
             VideogameButton.SetActive (false);
             MusicButton.SetActive (false);
@@ -132,7 +135,9 @@ public class TimerScript : MonoBehaviour {
 
     public void Music ()
     {
+        audiomanager.ReproducirSonido(clipMusica);
         timeLeft += BonusTime / 2;
+
         if (Overstimulation == true)
         {
             Overstimulation = false;
@@ -168,17 +173,11 @@ public class TimerScript : MonoBehaviour {
 
     public void LeavingMechanic ()
     {
-        if (Anger == true)
-        {
             Anger = false;
             AngerTimer = 0;
-        }
-
-        if (Anger == false)
-        {
-            Overthink = true;
-        }
+        
     }
+
 
 /*     public void PauseTimer() //lo he puesto en TalkScript
     {

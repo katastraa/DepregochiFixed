@@ -12,6 +12,7 @@ public class TalkScript : MonoBehaviour
     public GameObject ImageText;
     public float velocidadLetras, velocidadExtra, auxTimeLeft, clickCount;
     public Button Talkbutton;
+    private Button _button3;
    
 
     // Start is called before the first frame update
@@ -24,18 +25,32 @@ public class TalkScript : MonoBehaviour
         clickCount = 1;
     }
 
+    private void Awake()
+    {
+        Talkbutton = GetComponent<Button>();
+    }
     // Update is called once per frame
     void Update()
     {
 
         // Detect if the Alpha 3 key is pressed
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             // Call the method that is linked to the button press
             ActiveImageText();
             timerScript.AngerMechanic();
-            
+            FadeToColor3(Talkbutton.colors.pressedColor);
+
+        }else if (Input.GetKeyUp(KeyCode.B))
+        {
+            FadeToColor3(Talkbutton.colors.normalColor);
         }
+    }
+
+    void FadeToColor3(Color color)
+    {
+        Graphic graphic = GetComponent<Graphic>();
+        graphic.CrossFadeColor(color, Talkbutton.colors.fadeDuration, true, true);
     }
 
     public void ChangeText(string newText)
@@ -114,4 +129,6 @@ public class TalkScript : MonoBehaviour
         }
         clickCount = 1;
     }
+
+    
 }
